@@ -1,0 +1,7 @@
+Flask>=2.0.0
+opencv-python>=4.5.0
+psutil>=5.8.0
+# Note: picamera2 is typically pre-installed or installed via apt on Raspberry Pi OS:
+# sudo apt install python3-picamera2
+# Also MP4Box requires:
+# sudo apt install gpac

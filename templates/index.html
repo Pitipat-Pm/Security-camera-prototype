@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspberry Pi Security Camera</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 Raspberry Pi Security Camera</h1>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Left Column: Live Feed and Controls -->
+            <section class="card stream-card">
+                <h2>Live Stream</h2>
+                <div class="video-container">
+                    <img id="videoFeed" src="{{ url_for('video_feed') }}" alt="Live Camera Feed" width="320" height="240">
+                </div>
+
+                <div class="control-panel">
+                    <form id="startForm">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" onclick="setMode('photo')">📸 Take Photo</button>
+                            <button type="button" class="btn btn-warning" onclick="setMode('video')">📹 Start Video</button>
+                            <button type="button" class="btn btn-info" onclick="setMode('detection')">🎯 Start Detection</button>
+                        </div>
+                    </form>
+
+                    <div class="action-buttons">
+                        <form id="stopForm">
+                            <button type="submit" class="btn btn-danger">⏹️ Stop / Save</button>
+                        </form>
+
+                        <form id="resetForm" style="display:none;">
+                            <button type="submit" class="btn btn-secondary">🔄 Reset</button>
+                        </form>
+                    </div>
+
+                    <div id="statusMsg" class="status-box"></div>
+                </div>
+
+                <div id="latestPhoto" class="latest-photo-section">
+                    {% if latest_photo %}
+                    <h3>Latest Photo:</h3>
+                    <img src="/view_file?path={{ latest_photo }}" alt="Latest capture">
+                    {% endif %}
+                </div>
+            </section>
+
+            <!-- Right Column: Media Gallery & Logs -->
+            <section class="card gallery-card">
+                <h2>📁 Stored Media & Logs</h2>
+                <button class="btn btn-small" onclick="refreshFileLists()">🔄 Refresh List</button>
+                <div id="fileLists" class="file-lists">
+                    <p class="loading">Loading files...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
