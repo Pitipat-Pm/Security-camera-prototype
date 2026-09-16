@@ -10,9 +10,6 @@ videos/*.h264
 videos/*.mp4
 recordings/*.csv
 
-# Prototype backup (contains its own git)
-security-camera-prototpy/
-
 # System / IDE
 .vscode/
 .idea/
